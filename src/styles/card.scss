@@ -1,0 +1,89 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__link {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 7/6;
+    
+    @media (min-width: 768px) {
+      aspect-ratio: 23/20;
+    }
+    
+    @media (min-width: 1024px) {
+      aspect-ratio: 151/125;
+    }
+  }
+
+  &__like {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    
+    svg {
+      fill: #fff;
+      transition: 0.36s;
+    }
+
+    &:hover,
+    &_active {
+      color: #0044f0;
+      
+      svg {
+        color: #0044f0;
+        fill: #0044f0;
+      }
+    }
+  }
+
+  &__content {
+    margin: 12px 0;
+    
+    @media (min-width: 768px) {
+      margin: 16px 0 37px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 11px;
+    }
+
+    @media (min-width: 1024px) {
+      margin-bottom: 18px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 18px;
+    font-weight: 400;
+    font-size: 12px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+      font-size: 16px;
+    }
+  }
+
+  &__price {
+    font-size: 16px;
+
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  &__button {
+    margin-top: auto;
+  }
+}

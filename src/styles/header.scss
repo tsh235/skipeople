@@ -1,0 +1,145 @@
+.header {
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeff2;
+
+  &__container {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-areas: 
+    'logo links'
+    'search search';
+    gap: 17px;
+
+    @media (min-width: 1024px) {
+      grid-template-areas: 
+      'logo search links';
+      grid-template-columns: 130px 1fr auto;
+      align-items: center;
+    }
+  }
+
+  &__logo-link {
+    grid-area: logo;
+  }
+
+  &__logo {
+    width: 106px;
+
+    @media (min-width: 768px) {
+      width: 130px;
+    }
+  }
+
+  &__search {
+    grid-area: search;
+    position: relative;
+    width: 100%;
+    height: 38px;
+
+    @media (min-width: 1024px) {
+      max-width: 408px;
+      justify-self: center;
+    }
+
+    @media (min-width: 1440px) {
+      max-width: 514px;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px 0 24px;
+    border-radius: 32px;
+    border: 1px solid transparent;
+    background-color: #eeeff2;
+
+    &::placeholder {
+      color: #969eae;
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: #eeeff2;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px;
+    width: 16px;
+    height: 16px;
+    outline: 1px solid transparent;
+    outline-offset: 4px;
+    border-radius: 4px;
+
+    &:hover,
+    &:active {
+      color: #0044f0;
+    }
+    &:focus-visible {
+      color: #0044f0;
+      outline-color: #0044f0;
+    }
+  }
+
+  &__links {
+    grid-area: links;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (min-width: 1024px) {
+      gap: 24px;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-direction: row-reverse;
+    outline: 1px solid transparent;
+    outline-offset: 4px;
+    border-radius: 4px;
+
+    svg {
+      fill: transparent;
+      transition: 0.36s;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+      color: #0044f0;
+
+      svg {
+        fill: #0044f0;
+        color: #0044f0;
+      }
+    }
+
+    &:focus-visible {
+      outline-color: #0044f0;
+
+      svg {
+        color: #0044f0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  &__link-text {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+}

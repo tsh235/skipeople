@@ -1,0 +1,46 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 38px;
+  padding: 0 24px;
+  border-radius: 32px;
+  border: 1px solid #0044f0;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &_main {
+    background-color: #0044f0;
+    color: #fff;
+
+    &:hover {
+      background-color: #0945de;
+      border-color: #0945de;
+    }
+  
+    &:focus-visible {
+      border-color: #042f9c;
+      outline: none;
+    }
+  }
+
+  &_second {
+    color: #0044f0;
+    background-color: #fff;
+
+    &:hover {
+      background-color: #0044f0;
+      border-color: #0044f0;
+      color: #fff;
+    }
+  
+    &:focus-visible {
+      border-color: #042f9c;
+    }
+  }
+}

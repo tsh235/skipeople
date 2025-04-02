@@ -1,0 +1,43 @@
+
+.catalog {
+  overflow-x: hidden;
+  padding: 4px 0 20px;
+
+  @media (min-width: 768px) {
+    padding: 0 0 32px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 0 40px;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow: auto hidden;
+  }
+
+  &__link {
+    display: block;
+    padding: 11px 14px 13px;
+    border-radius: 32px;
+    border: 1px solid transparent;
+    background-color: #eeeff2;
+    color: #969eae;
+    outline: none;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-visible {
+      border-color: #0044f0;
+      color: #0044f0;
+    }
+
+    &_active {
+      background-color: #0044f0;
+      color: #fff;
+      pointer-events: none;
+    }
+  }
+}
