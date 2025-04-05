@@ -14,7 +14,8 @@
     "vite": "^6.2.4"
   },
   "dependencies": {
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "swiper": "^11.2.6"
   },
   "engines": {
     "node": ">=16.0.0"
