@@ -1,24 +1,23 @@
 import 'normalize.css';
 import './style.scss';
-import { Navigation, Thumbs } from 'swiper/modules';
-import Swiper from 'swiper';
-import 'swiper/css';
+import { initRouter } from './js/router.js';
+import { header } from './componens/header.js';
+import {footer} from './componens/footer.js';
+import { main } from './componens/mainLayout.js';
 
-const sliderThimbs = new Swiper('.slider-thumbs', {
-  spaceBetween: 10,
-  slidesPerView: 4,
-  freeMode: true,
-  watchSlidesProgress: true,
-});
+const init = () => {
+  if (!document.querySelector('header')) {
+    document.body.insertAdjacentElement('afterbegin', header());
+  }
+  if (!document.querySelector('main')) {
+    document.body.insertAdjacentElement('beforeend', main());
+  }
+  if (!document.querySelector('footer')) {
+    document.body.insertAdjacentElement('beforeend', footer());
+  }
 
-new Swiper('.slider-main', {
-  spaceBetween: 10,
-  modules: [Navigation, Thumbs],
-  navigation: {
-    nextEl: '.slider__button_next',
-    prevEl: '.slider__button_prev',
-  },
-  thumbs: {
-    swiper: sliderThimbs,
-  },
-});
+  initRouter();
+
+};
+
+init();
