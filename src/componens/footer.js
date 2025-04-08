@@ -1,6 +1,12 @@
 import { container } from './container.js';
 
+let rendered = false;
+
 export const footer = () => {
+  if (rendered) {
+    return '';
+  }
+
   const footerElem = document.createElement('footer');
   footerElem.classList.add('footer');
 
@@ -47,5 +53,8 @@ export const footer = () => {
   `;
 
   footerElem.append(container(child, 'footer__container'));
+  document.body.append(footerElem);
+
+  rendered = true;
   return footerElem;
 };

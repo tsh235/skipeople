@@ -1,39 +1,39 @@
 import Navigo from 'navigo';
-import { initSlider } from './initSlider.js';
-import { catalog } from '../componens/catalog.js';
-import { goods } from '../componens/goods.js';
-import { product } from '../componens/product.js';
-import { breadcrumbs } from '../componens/breadcrumbs.js';
-import { cart } from '../componens/cart.js';
-import { order } from '../componens/order.js';
+// import { initSlider } from './initSlider.js';
+// import { product } from '../componens/product.js';
+// import { breadcrumbs } from '../componens/breadcrumbs.js';
+// import { cart } from '../componens/cart.js';
+// import { order } from '../componens/order.js';
+import {header} from '../componens/header.js';
+import {main} from '../componens/main.js';
+import {footer} from '../componens/footer.js';
+import {getData} from './api.js';
+import {productList} from '../componens/productList.js';
+import {catalog} from '../componens/catalog.js';
 
 const router = new Navigo("/", { linksSelector: 'a[href^="/"]' });
 
 export const initRouter = () => {
-  const main = document.querySelector('main');
   router
-    .on('/', () => {
-      main.textContent = '';
-      main.insertAdjacentElement('beforeend', catalog());
-      main.insertAdjacentElement('beforeend', goods());
+    .on('/', async () => {
+      const goods = await getData();
+      header();
+      catalog(main(), goods);
+      productList('', goods, main());
+      footer();
     })
     .on('/favorite', () => {
-      main.textContent = '';
-      main.insertAdjacentElement('beforeend', goods());
+      console.log('favorite: ', favorite);
     })
     .on('/cart', () => {
-      main.textContent = '';
-      main.insertAdjacentElement('beforeend', cart());
+      console.log('cart: ', cart);
     })
     .on('/product', () => {
-      main.textContent = '';
-      main.insertAdjacentElement('beforeend', breadcrumbs());
-      main.insertAdjacentElement('beforeend', product());
-      initSlider();
+      console.log('product: ', product);
+      // initSlider();
     })
     .on('/order', () => {
-      main.textContent = '';
-      main.insertAdjacentElement('beforeend', order());
+      console.log('order: ', order);
     })
     .notFound(() => {
       console.log("ERROR 404");

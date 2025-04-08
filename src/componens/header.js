@@ -1,6 +1,12 @@
 import { container } from './container.js';
 
+let rendered = false;
+
 export const header = () => {
+  if (rendered) {
+    return '';
+  }
+  
   const headerElem = document.createElement('header');
   headerElem.classList.add('header');
 
@@ -43,5 +49,9 @@ export const header = () => {
   `;
 
   headerElem.append(container(child, 'header__container'));
+
+  document.body.append(headerElem);
+
+  rendered = true;
   return headerElem;
 };
