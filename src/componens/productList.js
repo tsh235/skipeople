@@ -4,6 +4,11 @@ import { container } from './container.js';
 
 
 export const productList = (title, data, parent) => {
+  // if (action === 'remove') {
+  //   document.querySelector('.goods__list').remove();
+  //   return;
+  // }
+
   let goodsItems = '';
 
   const renderGoodsItems = (arr, list) => {

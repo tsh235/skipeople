@@ -1,6 +1,6 @@
 import { container } from './container.js';
 
-export const product = () => {
+export const product = (title, goods, parent) => {
   const productElem = document.createElement('section');
   productElem.classList.add('product');
 
@@ -103,6 +103,7 @@ export const product = () => {
   `;
 
   productElem.append(container(child));
+  parent.append(productElem);
   return productElem;
 };
 

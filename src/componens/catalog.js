@@ -1,6 +1,12 @@
 import { container } from './container.js';
 
 export const catalog = (parent, data = []) => {
+
+  // if (action === 'remove') {
+  //   document.querySelector('.catalog').remove();
+  //   return;
+  // }
+
   let typeList = [];
   data.map(({type}) => typeList.push(type));
 
