@@ -9,7 +9,10 @@ import {getData} from './api.js';
 import {productList} from '../componens/productList.js';
 import {catalog} from '../componens/catalog.js';
 import {addFavorite} from './addFavorite.js';
-import {localStarageLoad} from './localStarage.js';
+import {localStorageLoad} from './localStorage.js';
+import {paginationHtml} from '../componens/paginationHtml.js';
+import {paginationData} from './paginationData.js';
+import {paginationCount} from './paginationCount.js';
 
 export const router = new Navigo("/", { linksSelector: 'a[href^="/"]' });
 
@@ -17,8 +20,13 @@ export const initRouter = () => {
   router
     .on('/', async () => {
       const goods = await getData();
-      catalog(main(), goods);
-      productList('', goods, main());
+      catalog(main(), goods[0]);
+      productList('', goods[0], main());
+
+      if (goods.length > 1) {
+        paginationHtml(main(), goods.length);
+        paginationCount(goods.length);
+      }
       addFavorite(goods);
       router.updatePageLinks();
     }, {
@@ -28,8 +36,14 @@ export const initRouter = () => {
       }
     })
     .on('/favorite', async () => {
-      const goods = await await getData();
-      productList('Избранное', localStarageLoad('ski-favorite'), main());
+      const goods = await localStorageLoad('ski-favorite');
+      const countPages = paginationData(goods, 12).length;
+      productList('Избранное', goods, main());
+
+      if (countPages > 1) {
+        paginationHtml(main(), localStorageLoad('ski-favorite').length);
+        paginationCount(localStorageLoad('ski-favorite').length);
+      }
       addFavorite(goods);
       router.updatePageLinks();
     }, {
@@ -41,7 +55,12 @@ export const initRouter = () => {
     .on('/search', async (search) => {
       const queryString = search.params.query;
       const goods = await getData(queryString);
-      productList('Результаты поиска', goods, main());
+      productList('Результаты поиска', goods[0], main());
+
+      if (goods.length > 1) {
+        paginationHtml(main(), goods.length);
+        paginationCount(goods.length);
+      }
       addFavorite(goods);
       router.updatePageLinks();
     }, {

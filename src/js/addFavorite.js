@@ -1,7 +1,7 @@
-import { localStarageLoad, localStarageSave } from './localStarage.js';
+import { localStorageLoad, localStorageSave } from './localStorage.js';
 
 export const addFavorite = async (data) => {
-  const favoriteList = localStarageLoad('ski-favorite');
+  const favoriteList = localStorageLoad('ski-favorite');
   const list = document.querySelector('.goods__list');
   
   if (list) {
@@ -14,20 +14,20 @@ export const addFavorite = async (data) => {
 
         if (favoriteList.length === 0) {
           favoriteList.push(item);
-          localStarageSave('ski-favorite', favoriteList);
+          localStorageSave('ski-favorite', favoriteList);
         } else {
           let thereIs = false;
           favoriteList.forEach((favoritItem, index) => {
             if (favoritItem.id === id) {
               thereIs = true;
               favoriteList.splice(index, 1);
-              localStarageSave('ski-favorite', favoriteList);
+              localStorageSave('ski-favorite', favoriteList);
             }
           });
 
           if (!thereIs) {
             favoriteList.push(item);
-            localStarageSave('ski-favorite', favoriteList);
+            localStorageSave('ski-favorite', favoriteList);
           }
         }
       }

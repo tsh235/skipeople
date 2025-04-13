@@ -1,5 +1,5 @@
 import {API_URL} from '../js/const.js';
-import {localStarageLoad} from '../js/localStarage.js';
+import {localStorageLoad} from '../js/localStorage.js';
 import { container } from './container.js';
 
 
@@ -39,7 +39,7 @@ export const productList = (title, data, parent) => {
     return items;
   };
 
-  const favoriteList = localStarageLoad('ski-favorite');
+  const favoriteList = localStorageLoad('ski-favorite');
 
   goodsItems = renderGoodsItems(data, favoriteList);
 
