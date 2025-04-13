@@ -1,15 +1,17 @@
-let rendered = false;
+// let rendered = false;
 
-export const main = () => {
-  if (rendered) {
-    return document.querySelector('main');
-  }
+// export const main = () => {
+//   if (rendered) {
+//     return document.querySelector('main');
+//   }
 
-  const mainElem = document.createElement('main');
-  mainElem.classList.add('main');
+//   const mainElem = document.createElement('main');
+//   mainElem.classList.add('main');
 
-  document.body.append(mainElem);
-  rendered = true;
+//   document.body.append(mainElem);
+//   rendered = true;
   
-  return mainElem;
-}
+//   return mainElem;
+// }
+
+export const main = () => document.querySelector('main');

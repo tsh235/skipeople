@@ -1,13 +1,6 @@
 import { container } from './container.js';
 
-let rendered = false;
-
 export const catalog = (parent, data = []) => {
-
-  if (rendered) {
-    return document.querySelector('.catalog');
-  }
-
   let typeList = [];
   data.map(({type}) => typeList.push(type));
 
@@ -34,8 +27,6 @@ export const catalog = (parent, data = []) => {
 
   catalogElem.append(container(child));
   parent.append(catalogElem);
-
-  rendered = true;
 
   return catalogElem;
 };
