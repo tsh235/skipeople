@@ -1,11 +1,16 @@
+import {API_URL} from '../js/const.js';
+import {localStorageLoad} from '../js/localStorage.js';
 import { container } from './container.js';
 
-export const product = (title, goods, parent) => {
+export const product = (product, parent) => {
+  console.log('product: ', product);
   const productElem = document.createElement('section');
   productElem.classList.add('product');
 
+  const favoriteList = localStorageLoad('ski-favorite');
+
   const child = `
-    <h2 class="product__title section-title">Горные лыжи</h2>
+    <h2 class="product__title section-title">${product.name}</h2>
 
     <div class="product__wrapper">
 
@@ -13,16 +18,16 @@ export const product = (title, goods, parent) => {
         <div class="swiper product__slider slider-main slider">
           <div class="swiper-wrapper slider-main__wrapper">
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-big.jpg" alt="" width="710" height="586" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="710" height="586" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-big.jpg" alt="" width="710" height="586" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="710" height="586" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-big.jpg" alt="" width="710" height="586" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="710" height="586" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-big.jpg" alt="" width="710" height="586" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="710" height="586" />
             </div>
           </div>
 
@@ -44,55 +49,55 @@ export const product = (title, goods, parent) => {
         <div class="swiper product__slider-thumbs slider-thumbs slider">
           <div class="swiper-wrapper slider-thumbs__wrapper">
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-small.jpg" alt="" width="167" height="138" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="167" height="138" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-small.jpg" alt="" width="167" height="138" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="167" height="138" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-small.jpg" alt="" width="167" height="138" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="167" height="138" />
             </div>
             <div class="swiper-slide slider__slide">
-              <img class="slider__img" src="/img/photo-small.jpg" alt="" width="167" height="138" />
+              <img class="slider__img" src="${API_URL}img${product.img}" alt="${product.name}" width="167" height="138" />
             </div>
           </div>
         </div>
       </div>
 
       <div class="product__info">
-        <p class="product__price">5 000 ₽</p>
+        <p class="product__price">${product.price} ₽</p>
         <p class="product__article">арт. 84348945757</p>
         <table class="product__table table">
           <caption class="table__title">Общие характеристики</caption>
           <tr class="table__row">
             <td class="table__field">Коллекция</td>
-            <td class="table__value">Snow</td>
+            <td class="table__value">${product.collection}</td>
           </tr>
           <tr class="table__row">
             <td class="table__field">Производитель</td>
-            <td class="table__value">Россия</td>
+            <td class="table__value">${product.manufacturer}</td>
           </tr>
           <tr class="table__row">
             <td class="table__field">Гарантия</td>
-            <td class="table__value">18 мес.</td>
+            <td class="table__value">${product.warranty}</td>
           </tr>
           <tr class="table__row">
             <td class="table__field">Срок службы</td>
-            <td class="table__value">5 лет</td>
+            <td class="table__value">${product.life}</td>
           </tr>
           <tr class="table__row">
             <td class="table__field">Цвет</td>
-            <td class="table__value">Синий</td>
+            <td class="table__value">${product.color}</td>
           </tr>
           <tr class="table__row">
             <td class="table__field">Макс. нагрузка</td>
-            <td class="table__value">130 кг</td>
+            <td class="table__value">${product.max_weight}</td>
           </tr>
         </table>
 
         <div class="product__btns">
-          <button class="product__btn btn btn_main" type="button">В корзину</button>
-          <button class="product__favorite" type="button" aria-label="В избранное">
+          <button class="product__btn btn btn_main" type="button" data-id="${product.id}">В корзину</button>
+          <button class="product__favorite like ${favoriteList.find(item => item.id === product.id) ? 'like_active' : ''}" type="button" aria-label="В избранное" data-id="${product.id}">
             <svg class="like-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.41331 13.8733C8.18665 13.9533 7.81331 13.9533 7.58665 13.8733C5.65331 13.2133 1.33331 10.46 1.33331 5.79332C1.33331 3.73332 2.99331 2.06665 5.03998 2.06665C6.25331 2.06665 7.32665 2.65332 7.99998 3.55998C8.67331 2.65332 9.75331 2.06665 10.96 2.06665C13.0066 2.06665 14.6666 3.73332 14.6666 5.79332C14.6666 10.46 10.3466 13.2133 8.41331 13.8733Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>                    

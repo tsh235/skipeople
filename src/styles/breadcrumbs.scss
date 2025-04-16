@@ -20,6 +20,10 @@
     gap: 6px;
   }
 
+  &__item:last-child {
+    pointer-events: none;
+  }
+
   &__item:last-child &__separator {
     display: none;
   }

@@ -49,21 +49,7 @@
 
   &__favorite {
     flex-shrink: 0;
-
-    svg {
-      fill: #fff;
-      transition: 0.36s;
-    }
-
-    &:hover,
-    &_active {
-      color: #0044f0;
-      
-      svg {
-        color: #0044f0;
-        fill: #0044f0;
-      }
-    }
+    position: static;
   }
 }
 

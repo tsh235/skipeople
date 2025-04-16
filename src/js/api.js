@@ -16,3 +16,14 @@ export const getData = async (query) => {
     console.log('error: ', error);
   }
 }
+
+export const getProductById = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}product/${id}`);
+    const obj = await response.json();
+
+    return obj;
+  } catch (error) {
+    console.log('error: ', error);
+  }
+};

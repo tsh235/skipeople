@@ -1,27 +1,25 @@
 import { container } from './container.js';
 
-export const breadcrumbs = () => {
+export const breadcrumbs = (parent, data) => {
   const breadcrumbsElem = document.createElement('div');
   breadcrumbsElem.classList.add('breadcrumbs');
+
+  const listItems = data.map(item => `
+    <li class="breadcrumbs__item">
+      <a class="breadcrumbs__link" href="${item.href}">${item.text}</a>
+      <span class="breadcrumbs__separator">&gt;</span>
+    </li>
+  `);
 
   const child = `
     <nav class="breadcrumbs__nav">
       <ul class="breadcrumbs__list">
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#!">Главная</a>
-          <span class="breadcrumbs__separator">&gt;</span>
-        </li>
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#!">Лыжи</a>
-          <span class="breadcrumbs__separator">&gt;</span>
-        </li>
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#!">Горные лыжи</a>
-        </li>
+        ${listItems}
       </ul>
     </nav>
   `;
 
   breadcrumbsElem.append(container(child));
+  parent.append(breadcrumbsElem);
   return breadcrumbsElem;
 };

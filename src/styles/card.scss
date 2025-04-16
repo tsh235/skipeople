@@ -25,29 +25,6 @@
     }
   }
 
-  &__like {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 16px;
-    height: 16px;
-    
-    svg {
-      fill: #fff;
-      transition: 0.36s;
-    }
-
-    &:hover,
-    &_active {
-      color: #0044f0;
-      
-      svg {
-        color: #0044f0;
-        fill: #0044f0;
-      }
-    }
-  }
-
   &__content {
     margin: 12px 0;
     
@@ -85,5 +62,28 @@
 
   &__button {
     margin-top: auto;
+  }
+}
+
+.like {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  
+  svg {
+    fill: #fff;
+    transition: 0.36s;
+  }
+
+  &:hover,
+  &_active {
+    color: #0044f0;
+    
+    svg {
+      color: #0044f0;
+      fill: #0044f0;
+    }
   }
 }

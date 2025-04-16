@@ -5,7 +5,7 @@ import { product } from '../componens/product.js';
 // import { cart } from '../componens/cart.js';
 // import { order } from '../componens/order.js';
 import {main} from '../componens/main.js';
-import {getData} from './api.js';
+import {getData, getProductById} from './api.js';
 import {productList} from '../componens/productList.js';
 import {catalog} from '../componens/catalog.js';
 import {addFavorite} from './addFavorite.js';
@@ -13,6 +13,7 @@ import {localStorageLoad} from './localStorage.js';
 import {paginationHtml} from '../componens/paginationHtml.js';
 import {paginationData} from './paginationData.js';
 import {paginationCount} from './paginationCount.js';
+import {breadcrumbs} from '../componens/breadcrumbs.js';
 
 export const router = new Navigo("/", { linksSelector: 'a[href^="/"]' });
 
@@ -27,7 +28,7 @@ export const initRouter = () => {
         paginationHtml(main(), goods.length);
         paginationCount(goods.length);
       }
-      addFavorite(goods);
+      addFavorite(goods[0], '.goods__list');
       router.updatePageLinks();
     }, {
       leave(done) {
@@ -38,13 +39,17 @@ export const initRouter = () => {
     .on('/favorite', async () => {
       const goods = await localStorageLoad('ski-favorite');
       const countPages = paginationData(goods, 12).length;
+      breadcrumbs(main(), [
+        {'text': 'Главная', 'href': '/'},
+        {'text': 'Избранное', 'href': '/favorite'},
+      ]);
       productList('Избранное', goods, main());
 
       if (countPages > 1) {
         paginationHtml(main(), localStorageLoad('ski-favorite').length);
         paginationCount(localStorageLoad('ski-favorite').length);
       }
-      addFavorite(goods);
+      addFavorite(goods, '.goods__list');
       router.updatePageLinks();
     }, {
       leave(done) {
@@ -61,7 +66,7 @@ export const initRouter = () => {
         paginationHtml(main(), goods.length);
         paginationCount(goods.length);
       }
-      addFavorite(goods);
+      addFavorite(goods, '.goods__list');
       router.updatePageLinks();
     }, {
       leave(done) {
@@ -72,10 +77,17 @@ export const initRouter = () => {
     .on('/cart', () => {
       console.log('cart: ');
     })
-    .on('/product/:id', async () => {
+    .on('/product/:id', async (obj) => {
       const goods = await getData();
-      product('Название товара', goods, main());
+      const productData = await getProductById(obj.data.id);
+      breadcrumbs(main(), [
+        {'text': 'Главная', 'href': '/'},
+        {'text': productData.type, 'href': `/${productData.type}`},
+        {'text': productData.name, 'href': '#!'},
+      ]);
+      product(productData, main());
       initSlider();
+      addFavorite(productData, '.product');
       router.updatePageLinks();
     }, {
       leave(done) {
